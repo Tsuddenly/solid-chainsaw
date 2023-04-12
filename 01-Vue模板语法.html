@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>01-模板语法</title>
+    <style>
+        .first{
+            background-color: cadetblue;
+        }
+        .second{
+            background-color: darkslateblue;
+        }
+        .thireed{
+            background-color: sienna;
+        }
+    </style>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+       {{MyName}} ---{{MyAge}}
+        <div>{{10>20?'aaa':'bbb'}}</div>
+        在js中不加引号市变量，下边class中加了引号是作为字符串出现的
+        <div :class = "whichcolor">这是个div，需要切换背景色，这个是用which color没有取反</div>
+        <div :class = "isColor?'thireed':'first'">这是个div，需要切换背景色，这个是用iscolor</div>
+        <img :src="imgpath"/><br>
+
+<!--        @ 符号  事件绑定-->
+<!--        ：      绑定一个变量-->
+<!--        v-show  v-if 指令-->
+        <div v-show="isso">我这个div可以动态显示隐藏,我只是隐藏了，我的div还在，只是显示是display="none"</div>
+        <div v-if="isadd">我这个div可以添加和删除，我显示的时候是新鲜添加的，我隐藏的时候是真实删除了，div也没了</div>
+
+<!--        v-for 列表渲染的指令-->
+        <ul>
+            <li v-for="(item,index) in list">
+                {{item}}---{{index}}
+            </li>
+        </ul>
+        <button @click="handleChange()">change</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                MyName:"tian",
+                MyAge: "30",
+                whichcolor:"second",
+                isColor:true,
+                imgpath:"",
+                isso:false,
+                isadd:false,
+                list:["a","aa","aaa","aaaa","bb"]
+            },
+            methods:{
+                handleChange() {
+                    this.MyName ="yang"
+                    this.MyAge ="28"
+                    this.whichcolor = "second"
+                    this.isColor = !this.isColor
+                    this.imgpath = "https://hr.svolt.cn:48888/assets/img/logs.b3442882.png"
+                    this.isso = !this.isso
+                    this.isadd = !this.isadd
+                    console.log("我可以点击改变",this)
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>
